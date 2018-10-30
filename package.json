@@ -1,0 +1,25 @@
+{
+  "name": "book_app",
+  "version": "1.0.0",
+  "description": "An app for looking up books from Google Books",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "superagent": "^4.0.0-beta.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scott-currie/book_app.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scott-currie/book_app/issues"
+  },
+  "homepage": "https://github.com/scott-currie/book_app#readme"
+}
