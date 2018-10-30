@@ -32,8 +32,8 @@ Estimate of time needed to complete: 75min
 
 Start time: 10:40am
 
-Finish time: _____
+Finish time: 11:48am
 
-Actual time needed to complete: _____
+Actual time needed to complete: 68min
 
 ## Credits and Collaborations
