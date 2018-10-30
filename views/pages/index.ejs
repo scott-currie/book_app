@@ -1,28 +1,54 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge; chrome=1"> <!-- Render Chrome if available or using latest version of Internet Explorer (Recommended). -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
     <title>Book Finder</title>
+    
     <link  href="/styles/reset.css" rel="stylesheet" type="text/css">
     <link  href="/styles/theme.css" rel="stylesheet" type="text/css">
   </head>
-  <body>
-    <h1>Hello, Bookworm</h1>
 
-    <form action="/searches" method="post">
-      <label>
-        Search for a book:
-        <input type="search" name="book-search">
-      </label>
-      <button>Search</button>
-      <label>
-        Title:
-        <input type="radio" name="book-search" id="title" value="title" checked>
-      </label>
-      <label>
-        Author:
-        <input type="radio" name="book-search" id="author" value="author">
-      </label>
-    </form>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/views/pages/index.ejs">Book Finder Pro</a></li>
+          <li><input type="button"></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <h1>Search By Title or Author</h1>
+
+      </section>
+      <section>
+        <form action="/searches" method="post">
+          <label>
+            <input type="search" name="book-search" placeholder="Enter a title or author">
+          </label>
+          <label>
+            Title:
+            <input type="radio" name="book-search" id="title" value="title" checked>
+          </label>
+          <label>
+            Author:
+            <input type="radio" name="book-search" id="author" value="author">
+          </label>
+          <button>Search</button>
+
+        </form>
+
+      </section>
+    </main>
+
+    <footer>
+
+    </footer>
 
   </body>
 </html>

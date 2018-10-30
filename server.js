@@ -9,10 +9,12 @@ require('dotenv').config();
 const PORT = process.env.PORT;
 const app = express();
 
+
 // Middleware
 app.use(express.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+
 
 // CRUD actions
 app.get('/', function(req, res) {
@@ -22,6 +24,7 @@ app.get('/', function(req, res) {
 app.post('/searches', postResults);
 
 
+// Book object constructor
 function Book(query) {
   this.title = (query.volumeInfo.title) ? query.volumeInfo.title : "Title not found";
   this.author = (query.volumeInfo.authors[0]) ? query.volumeInfo.authors[0]: "Author not found";
@@ -30,6 +33,8 @@ function Book(query) {
   this.description = (query.volumeInfo.description) ? query.volumeInfo.description: "Description not found.";
 }
 
+
+// Get data and post to show page
 function postResults(req, res) {
   const query = req.body['book-search'][0];
   let _url = `https://www.googleapis.com/books/v1/volumes?q=${query}`;
