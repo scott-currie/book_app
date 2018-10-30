@@ -15,5 +15,25 @@ Install Node, all required modules, and run.
 ## Change Log
 
 10-30-2018 09:26am - Project started
+Number and name of feature: Server-Side-Rendering
+
+Estimate of time needed to complete: 60min
+
+Start time: 9:26am
+
+Finish time: 10:30am
+
+Actual time needed to complete: 64 min
+
+10-30-2018 10:40am - Feature 2 started
+Number and name of feature: Search Google Books API
+
+Estimate of time needed to complete: 75min
+
+Start time: 10:40am
+
+Finish time: _____
+
+Actual time needed to complete: _____
 
 ## Credits and Collaborations
