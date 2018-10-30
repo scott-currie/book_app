@@ -36,4 +36,15 @@ Finish time: 11:48am
 
 Actual time needed to complete: 68min
 
+10-30-2018 12:13pm - Feature 3 started
+Number and name of feature: Display Results
+
+Estimate of time needed to complete: 45min
+
+Start time: 12:13pm
+
+Finish time: ?
+
+Actual time needed to complete: ?
+
 ## Credits and Collaborations
