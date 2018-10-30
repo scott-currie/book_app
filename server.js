@@ -35,3 +35,10 @@ app.post('/', function(req, res) {
 
 app.listen(PORT,()  => console.log(`Listening on ${PORT}`));
 
+function Book(query) {
+  this.title = (query.title) ? query.title : "Title not found";
+  this.author = (query.author) ? query.author: "Author not found";
+  this.isbn = (query.isbn) ? query.isbn: "ISBN not found";
+  this.image_url = (query.image_url) ? query.image_url: "Image not found";
+  this.description = (query.description) ? query.description: "Description not found.";
+}
