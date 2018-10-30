@@ -1,0 +1,12 @@
+<h1>Show Results Page</h1>
+
+  <% data.forEach( book => { %>
+      <ul>
+        <li><%= book.title %></li>
+        <li><%= book.author %></li>
+        <li><%= book.isbn %></li>
+        <li><%= book.image_url %></li>
+        <li><%= book.description %></li>
+      </ul>
+    <% }); %>
+
