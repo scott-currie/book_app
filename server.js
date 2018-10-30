@@ -15,11 +15,22 @@ const PORT = process.env.PORT;
 
 const app = express();
 app.use(cors());
+app.use(express.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+
 // Set routes
-app.get('/hello', function(req, res) {
+// app.get('/hello', function(req, res) {
+//   res.render('pages/index');
+// });
+
+app.get('/', function(req, res) {
   res.render('pages/index');
+});
+
+app.post('/', function(req, res) {
+  res.send('POST request from form');
+  console.log(req.body);
 });
 
 app.listen(PORT,()  => console.log(`Listening on ${PORT}`));
