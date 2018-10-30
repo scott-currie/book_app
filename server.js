@@ -28,10 +28,7 @@ app.get('/', function(req, res) {
   res.render('pages/index');
 });
 
-app.post('/', function(req, res) {
-  res.send('POST request from form');
-  console.log(req.body);
-});
+app.post('/searches', postResults);
 
 app.listen(PORT,()  => console.log(`Listening on ${PORT}`));
 
@@ -41,4 +38,15 @@ function Book(query) {
   this.isbn = (query.isbn) ? query.isbn: "ISBN not found";
   this.image_url = (query.image_url) ? query.image_url: "Image not found";
   this.description = (query.description) ? query.description: "Description not found.";
+}
+
+function postResults(req, res) {
+  const _URL = `https://www.googleapis.com/books/v1/volumes?q=${req.query.title}`;
+  return superagent.get(_URL)
+  .then((data) => {
+    console.log(data);
+    res.render('pages/searches/show', data);
+  });
+  // res.render(_URL);
+
 }
