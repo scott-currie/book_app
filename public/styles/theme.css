@@ -1,5 +1,25 @@
+header, footer {
+  background-color: #984447;
+  color: #add9f4;
+  text-decoration: none;
+}
+
+header a {
+  color: #add9f4;
+  text-decoration: none;
+}
+
 h1 {
-  background-color: red;
-  color: yellow;
-  font-size: xx-large;
+  color: #984447;
+  background-color: #476c9b;
+  font-size: x-large;
+}
+
+main {
+  background-color: #add9f4;
+}
+
+button {
+  color: #468c98;
+  background-color: #101419;
 }
