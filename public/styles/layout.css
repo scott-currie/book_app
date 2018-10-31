@@ -1,8 +1,14 @@
 body {
   display: flex;
+  flex: 1;
   flex-direction: column;
+  height: 100vh;
   padding-left: 15%;
   padding-right: 15%;
+}
+
+header {
+  height: 2.5em;
 }
 
 nav {
@@ -13,6 +19,10 @@ nav ul {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+main {
+  height: 80%;
 }
 
 main section:first-of-type h1 {
@@ -30,7 +40,6 @@ main section:nth-of-type(2) form {
 }
 
 main section:nth-of-type(2) form label {
-  background-color: blue;
   display: flex;
   justify-content: flex-start;
   padding-bottom: 2%;
@@ -44,4 +53,16 @@ main section:nth-of-type(2) form label {
 
  #searchField {
    width: 100%;
+ }
+
+footer {
+  height: 2.5em;
+}
+
+ footer ul {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2%;
  }
