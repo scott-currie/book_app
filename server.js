@@ -12,7 +12,7 @@ const app = express();
 // Middleware
 const dbClient = new pg.Client(process.env.DATABASE_URL);
 dbClient.connect();
-clientInformation.on('err', err => console.log(err));
+dbClient.on('err', err => console.log(err));
 
 app.use(express.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
@@ -34,14 +34,29 @@ function Book(query) {
 }
 
 
-function getBooks(req res) {
+function getBooks(req, res) {
   fetchBooks();
   // Render data on index page
 }
 
 // Fetch books from db
 function fetchBooks() {
-  // Query DB for data
+  const SQL = 'SELECT * FROM books';
+  
+  dbClient.query(SQL)
+  .then(result => {
+    return (result.rows).map((book) => {
+      return {
+              author: book.author, 
+              title: book.title, 
+              isbn: book.isbn, 
+              image_url: book.image_url, 
+              description: book.description,
+              bookshelf: book.bookshelf
+            }
+    });
+  });
+
   // Iterate over data to instantiate books
 
   // Return an array of Book instances
