@@ -18,7 +18,7 @@ app.use(express.static('public'));
 
 // CRUD actions
 app.get('/', function(req, res) {
-  res.render('pages/index');
+  res.render('pages/searches/new');
 });
 
 app.post('/searches', postResults);
