@@ -12,3 +12,8 @@ nav ul {
   flex-direction: row;
   justify-content: space-between;
 }
+
+main section:first-of-type h1 {
+  padding: 2%;
+  text-align: center;
+}
