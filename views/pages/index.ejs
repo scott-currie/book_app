@@ -1,60 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-
-    <title>Book Finder</title>
-
-    <link  href="/styles/reset.css" rel="stylesheet" type="text/css">
-    <link  href="/styles/base.css" rel="stylesheet" type="text/css">
-    <link  href="/styles/layout.css" rel="stylesheet" type="text/css">
-    <link  href="/styles/theme.css" rel="stylesheet" type="text/css">
-  </head>
+  <%- include('./../pages/partials/head.ejs') %>
 
   <body>
-    <header>
-      <nav>
-        <ul>
-          <li><a href="/views/pages/index.ejs">Book Finder Pro</a></li>
-          <li><input type="button"></li>
-        </ul>
-      </nav>
-    </header>
+    <%- include('./../pages/partials/header.ejs') %>
 
     <main>
       <section>
         <h1>Search By Title or Author</h1>
-
       </section>
       <section>
-        <form action="/searches" method="post">
-          <label>
-            <input id ="searchField" type="search" name="book-search" placeholder="Enter a title or author">
-          </label>
-          <label>
-            Title:
-            <input type="radio" name="book-search" id="title" value="title" checked>
-          </label>
-          <label>
-            Author:
-            <input type="radio" name="book-search" id="author" value="author">
-          </label>
-          <button>Search for Books</button>
-
-        </form>
+        <%- include('./../pages/partials/form.ejs') %>
 
       </section>
     </main>
 
-    <footer>
-      <ul>
-        <li><img src="https://via.placeholder.com/15" alt=""></li>
-        <li><img src="https://via.placeholder.com/15" alt=""></li>
-        <li><img src="https://via.placeholder.com/15" alt=""></li>
-        <li><img src="https://via.placeholder.com/15" alt=""></li>
-      </ul>
-    </footer>
+    <%- include('./../pages/partials/footer.ejs') %>
 
   </body>
 </html>
