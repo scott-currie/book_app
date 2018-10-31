@@ -17,10 +17,7 @@ app.use(express.static('public'));
 
 
 // CRUD actions
-app.get('/', function(req, res) {
-  res.render('pages/searches/new');
-});
-
+app.get('/', getBooks);
 app.post('/searches', postResults);
 
 
@@ -33,6 +30,19 @@ function Book(query) {
   this.description = (query.volumeInfo.description) ? query.volumeInfo.description: "Description not found.";
 }
 
+
+function getBooks(req res) {
+  fetchBooks();
+  // Render data on index page
+}
+
+// Fetch books from db
+function fetchBooks() {
+  // Query DB for data
+  // Iterate over data to instantiate books
+
+  // Return an array of Book instances
+}
 
 // Get data and post to show page
 function postResults(req, res) {
