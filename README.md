@@ -43,8 +43,19 @@ Estimate of time needed to complete: 45min
 
 Start time: 12:13pm
 
-Finish time: ?
+Finish time: 1:50pm
 
-Actual time needed to complete: ?
+Actual time needed to complete: 90min
+
+10-30-2018 9:12am - Feature 4 started
+Number and name of feature: Error Handling
+
+Estimate of time needed to complete: 45min
+
+Start time: 9:12am 
+
+Finish time: 
+
+Actual time needed to complete: 
 
 ## Credits and Collaborations
