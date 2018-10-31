@@ -9,8 +9,11 @@ require('dotenv').config();
 const PORT = process.env.PORT;
 const app = express();
 
-
 // Middleware
+const dbClient = new pg.Client(process.env.DATABASE_URL);
+dbClient.connect();
+clientInformation.on('err', err => console.log(err));
+
 app.use(express.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
