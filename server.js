@@ -54,7 +54,8 @@ function postResults(req, res) {
     console.log(data.body.items[0]);
     const books = data.body.items.map(book => new Book(book));
     res.render('pages/searches/show', {data: books});
-  });
+  })
+  .catch((err) => res.render('pages/error.ejs', {err:err}));
   // res.render(_URL);
 
 }
