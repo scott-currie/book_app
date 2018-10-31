@@ -7,6 +7,8 @@
     <title>Book Finder</title>
 
     <link  href="/styles/reset.css" rel="stylesheet" type="text/css">
+    <link  href="/styles/base.css" rel="stylesheet" type="text/css">
+    <link  href="/styles/layout.css" rel="stylesheet" type="text/css">
     <link  href="/styles/theme.css" rel="stylesheet" type="text/css">
   </head>
 
@@ -28,7 +30,7 @@
       <section>
         <form action="/searches" method="post">
           <label>
-            <input type="search" name="book-search" placeholder="Enter a title or author">
+            <input id ="searchField" type="search" name="book-search" placeholder="Enter a title or author">
           </label>
           <label>
             Title:
@@ -38,7 +40,7 @@
             Author:
             <input type="radio" name="book-search" id="author" value="author">
           </label>
-          <button>Search</button>
+          <button>Search for Books</button>
 
         </form>
 
@@ -46,7 +48,12 @@
     </main>
 
     <footer>
-
+      <ul>
+        <li><img src="https://via.placeholder.com/15" alt=""></li>
+        <li><img src="https://via.placeholder.com/15" alt=""></li>
+        <li><img src="https://via.placeholder.com/15" alt=""></li>
+        <li><img src="https://via.placeholder.com/15" alt=""></li>
+      </ul>
     </footer>
 
   </body>

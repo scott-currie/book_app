@@ -52,10 +52,20 @@ Number and name of feature: Error Handling
 
 Estimate of time needed to complete: 45min
 
-Start time: 9:12am 
+Start time: 9:12am
 
 Finish time: 9:28am
 
 Actual time needed to complete: 16min
 
+10-31-2018 9:36am - Feature 5 started
+Number and name of feature: Styling the Application
+
+Estimate of time needed to complete: 120min
+
+Start time: 9:36am
+
+Finish time: 11:12am
+
+Actual time needed to complete: 96min
 ## Credits and Collaborations

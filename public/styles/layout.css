@@ -1,0 +1,68 @@
+body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100vh;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+header {
+  height: 2.5em;
+}
+
+nav {
+  padding: 2%;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+main {
+  height: 80%;
+}
+
+main section:first-of-type h1 {
+  padding: 2%;
+  text-align: center;
+}
+
+main section:nth-of-type(2) form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+main section:nth-of-type(2) form label {
+  display: flex;
+  justify-content: flex-start;
+  padding-bottom: 2%;
+  padding-top: 2%;
+  width: 100%;
+}
+
+/* main section:nth-of-type(2) form label input:first-of-type {
+  width: 100%;
+ } */
+
+ #searchField {
+   width: 100%;
+ }
+
+footer {
+  height: 2.5em;
+}
+
+ footer ul {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2%;
+ }
