@@ -40,10 +40,14 @@ function postResults(req, res) {
   let _url = `https://www.googleapis.com/books/v1/volumes?q=${query}`;
   
   return superagent.get(_url)
-    .then((data) => {
-      const books = data.body.items.map(book => new Book(book));
-      res.render('pages/searches/show', {data: books});
-  });
-  
+  .then((data) => {
+    console.log(data.body.items[0]);
+    const books = data.body.items.map(book => new Book(book));
+    res.render('pages/searches/show', {data: books});
+  })
+  .catch((err) => res.render('pages/error.ejs', {err:err}));
+  // res.render(_URL);
+
 }
+
 app.listen(PORT,()  => console.log(`Listening on ${PORT}`));
