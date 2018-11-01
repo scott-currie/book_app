@@ -22,6 +22,7 @@ app.use(express.static('public'));
 // CRUD actions
 app.get('/', getBooks);
 app.post('/searches', postResults);
+app.get('/books/:id', getTheBook);
 
 
 // Book object constructor
@@ -36,15 +37,16 @@ function Book(query) {
 
 function getBooks(req, res) {
   const SQL = 'SELECT * FROM books';
-  
+
   dbClient.query(SQL)
   .then(result => {
     const books = (result.rows).map((book) => {
       return {
-              author: book.author, 
-              title: book.title, 
-              isbn: book.isbn, 
-              image_url: book.image_url, 
+              id: book.id,
+              author: book.author,
+              title: book.title,
+              isbn: book.isbn,
+              image_url: book.image_url,
               description: book.description,
               bookshelf: book.bookshelf
             }
@@ -53,28 +55,6 @@ function getBooks(req, res) {
   });
 }
 
-// Fetch books from db
-// function fetchBooks() {
-//   const SQL = 'SELECT * FROM books';
-  
-//   dbClient.query(SQL)
-//   .then(result => {
-//     return (result.rows).map((book) => {
-//       return {
-//               author: book.author, 
-//               title: book.title, 
-//               isbn: book.isbn, 
-//               image_url: book.image_url, 
-//               description: book.description,
-//               bookshelf: book.bookshelf
-//             }
-//     });
-//   });
-
-//   // Iterate over data to instantiate books
-
-//   // Return an array of Book instances
-// }
 
 // Get data and post to show page
 function postResults(req, res) {
@@ -92,6 +72,17 @@ function postResults(req, res) {
   .catch((err) => res.render('pages/error.ejs', {err:err}));
   // res.render(_URL);
 
+}
+
+function getTheBook(req, res) {
+  console.log('doing getTheBook');
+  const SQL = `SELECT * FROM books WHERE id = $1;`;
+  const values = [req.params.id];
+  dbClient.query(SQL, values)
+  .then(result => {
+    res.render('pages/books/show', {book: result.rows[0]});
+  })
+  .catch((err) => res.render('pages/error.ejs', {err:err}));
 }
 
 app.listen(PORT,()  => console.log(`Listening on ${PORT}`));

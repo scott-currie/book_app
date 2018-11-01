@@ -1,0 +1,14 @@
+<html>
+  <%- include('../partials/head.ejs') %>
+<body>
+  <%- include('../partials/header.ejs') %>
+  <main>
+    <%- include('../partials/detail.ejs', {book: book, route: "#"}) %>
+    <a href="#">update details</a>
+    <a href="#">delete book</a>
+  </main>
+  <%- include('../partials/footer.ejs') %>
+
+</body>
+</html>
+
