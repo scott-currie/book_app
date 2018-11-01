@@ -3,12 +3,12 @@
 <body>
   <%- include('../partials/header.ejs') %>
   <main>
-    <section>
-      <h1>Here's your book</h1>
-    </section>
-    <%- include('detail.ejs', {book: book}) %>
+    <%- include('../partials/detail.ejs', {book: book, route: "#"}) %>
+    <a href="#">update details</a>
+    <a href="#">delete book</a>
   </main>
   <%- include('../partials/footer.ejs') %>
+
 </body>
 </html>
 
