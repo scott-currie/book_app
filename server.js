@@ -26,12 +26,20 @@ app.get('/books/:id', getTheBook);
 
 
 // Book object constructor
-function Book(query) {
-  this.title = (query.volumeInfo.title) ? query.volumeInfo.title : "Title not found";
-  this.author = (query.volumeInfo.authors[0]) ? query.volumeInfo.authors[0]: "Author not found";
-  this.isbn = (query.volumeInfo.industryIdentifiers[0].identifier) ? query.volumeInfo.industryIdentifiers[0].identifier: "ISBN not found";
-  this.image_url = (query.volumeInfo.imageLinks.thumbnail) ? query.volumeInfo.imageLinks.thumbnail: "Image not found";
-  this.description = (query.volumeInfo.description) ? query.volumeInfo.description: "Description not found.";
+function Book(bookData) {
+  this.title = (bookData.title) ? bookData.title : "Title not found";
+  this.description = (bookData.description) ? bookData.description: "Description not found.";
+  // If bookData has no id, it's an API result
+  if (!bookData.id) {
+    this.author = (bookData.authors[0]) ? bookData.authors[0]: "Author not found";
+    this.isbn = (bookData.industryIdentifiers[0].identifier) ? bookData.industryIdentifiers[0].identifier: "ISBN not found";
+    this.image_url = (bookData.imageLinks.thumbnail) ? bookData.imageLinks.thumbnail: "Image not found";
+  }
+  else {
+    this.author = (bookData.author) ? bookData.author: "Author not found";
+    this.isbn = (bookData.isbn) ? bookData.isbn: "ISBN not found";
+    this.image_url = (bookData.image_url) ? bookData.image_url: "Image not found";
+  }
 }
 
 
@@ -65,8 +73,8 @@ function postResults(req, res) {
 
   return superagent.get(_url)
   .then((data) => {
-    console.log(data.body.items[0]);
-    const books = data.body.items.map(book => new Book(book));
+    // console.log(data.body.items[0]);
+    const books = data.body.items.map(apiBook => new Book(apiBook.volumeInfo));
     res.render('pages/searches/show', {data: books});
   })
   .catch((err) => res.render('pages/error.ejs', {err:err}));
