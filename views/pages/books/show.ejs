@@ -4,8 +4,9 @@
   <%- include('../partials/header.ejs') %>
   <main>
     <section>
-      <h1>This is the detaip page for your book.</h1>
+      <h1>Here's your book</h1>
     </section>
+    <%- include('detail.ejs', {book: book}) %>
   </main>
   <%- include('../partials/footer.ejs') %>
 </body>
