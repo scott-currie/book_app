@@ -11,13 +11,14 @@
         <h1>Saved Books</h1>
       </section>
       <section class="deck">
-        <% books.forEach(book => { %>
+        <% books.forEach(book => {
+          console.log('Book ID', book); %>
           <div class="card">
             <ul>
               <li><img src="<%= book.image_url %>" alt="book cover"></li>
               <li><%= book.title %></li>
               <li><%= book.author %></li>
-              <li><button formaction="/books/show/:id" formmethod="get">View Details</button></li>
+              <li><a href="/books/<%= book.id %>">View Details</a></li>
             </ul>
           </div>
          <% }); %>
