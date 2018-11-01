@@ -36,9 +36,11 @@ function Book(query) {
 
 // Get data and post to show page
 function postResults(req, res) {
-  const query = req.body['book-search'][0];
+  // const query = req.body['book-search'][0];
+  const searchTerm = req.body['book-search'][0];
+  const query = (req.body['book-search'][1] === 'title') ? `+intitle:${searchTerm}` : `+inauthor:${searchTerm}`;
   let _url = `https://www.googleapis.com/books/v1/volumes?q=${query}`;
-  
+
   return superagent.get(_url)
   .then((data) => {
     console.log(data.body.items[0]);
