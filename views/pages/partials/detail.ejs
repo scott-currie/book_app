@@ -1,0 +1,16 @@
+<section class="card">
+  <ul>
+    <li><img src="<%= book.image_url %>"></li>
+    <li><h2><%= book.title %></h2></li>
+    <li><p><%= book.author %><p></li>
+    <% if (route === '/') { %>
+      <li><a href="/books/<%= book.id %>">View Details</a></li>
+
+    <% } else { %>
+
+      <li><p><%= book.description %></p></li>
+      <li><p>ISBN: <%= book.isbn %></p></li>
+      <li><p>Bookshelf: <%= book.bookshelf %></p></li>
+    <% } %>
+  </ul>
+</section>
