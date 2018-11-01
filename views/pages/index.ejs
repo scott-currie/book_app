@@ -7,10 +7,18 @@
 
     <main>
       <section>
+        <div><%= books.length %></div>
         <h1>Saved Books</h1>
       </section>
       <section>
-        
+        <% books.forEach(book => { %>
+          <ul>
+            <li><img src="<%= book.image_url %>" alt="book cover"></li>
+            <li><%= book.title %></li>
+            <li><%= book.author %></li>
+            <li>View Details</li>
+          </ul>
+         <% }); %>
       </section>
     </main>
 

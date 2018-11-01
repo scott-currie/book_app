@@ -35,17 +35,11 @@ function Book(query) {
 
 
 function getBooks(req, res) {
-  fetchBooks();
-  // Render data on index page
-}
-
-// Fetch books from db
-function fetchBooks() {
   const SQL = 'SELECT * FROM books';
   
   dbClient.query(SQL)
   .then(result => {
-    return (result.rows).map((book) => {
+    const books = (result.rows).map((book) => {
       return {
               author: book.author, 
               title: book.title, 
@@ -55,12 +49,32 @@ function fetchBooks() {
               bookshelf: book.bookshelf
             }
     });
+    res.render('./pages/index', {books: books});
   });
-
-  // Iterate over data to instantiate books
-
-  // Return an array of Book instances
 }
+
+// Fetch books from db
+// function fetchBooks() {
+//   const SQL = 'SELECT * FROM books';
+  
+//   dbClient.query(SQL)
+//   .then(result => {
+//     return (result.rows).map((book) => {
+//       return {
+//               author: book.author, 
+//               title: book.title, 
+//               isbn: book.isbn, 
+//               image_url: book.image_url, 
+//               description: book.description,
+//               bookshelf: book.bookshelf
+//             }
+//     });
+//   });
+
+//   // Iterate over data to instantiate books
+
+//   // Return an array of Book instances
+// }
 
 // Get data and post to show page
 function postResults(req, res) {
