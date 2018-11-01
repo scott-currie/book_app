@@ -17,7 +17,7 @@
               <li><img src="<%= book.image_url %>" alt="book cover"></li>
               <li><%= book.title %></li>
               <li><%= book.author %></li>
-              <li>View Details</li>
+              <li><button formaction="/books/show/:id" formmethod="get">View Details</button></li>
             </ul>
           </div>
          <% }); %>
