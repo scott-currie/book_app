@@ -9,18 +9,18 @@ require('dotenv').config();
 const PORT = process.env.PORT;
 const app = express();
 
-
 // Middleware
+const dbClient = new pg.Client(process.env.DATABASE_URL);
+dbClient.connect();
+dbClient.on('err', err => console.log(err));
+
 app.use(express.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 
 // CRUD actions
-app.get('/', function(req, res) {
-  res.render('pages/index');
-});
-
+app.get('/', getBooks);
 app.post('/searches', postResults);
 
 
@@ -33,6 +33,48 @@ function Book(query) {
   this.description = (query.volumeInfo.description) ? query.volumeInfo.description: "Description not found.";
 }
 
+
+function getBooks(req, res) {
+  const SQL = 'SELECT * FROM books';
+  
+  dbClient.query(SQL)
+  .then(result => {
+    const books = (result.rows).map((book) => {
+      return {
+              author: book.author, 
+              title: book.title, 
+              isbn: book.isbn, 
+              image_url: book.image_url, 
+              description: book.description,
+              bookshelf: book.bookshelf
+            }
+    });
+    res.render('./pages/index', {books: books});
+  });
+}
+
+// Fetch books from db
+// function fetchBooks() {
+//   const SQL = 'SELECT * FROM books';
+  
+//   dbClient.query(SQL)
+//   .then(result => {
+//     return (result.rows).map((book) => {
+//       return {
+//               author: book.author, 
+//               title: book.title, 
+//               isbn: book.isbn, 
+//               image_url: book.image_url, 
+//               description: book.description,
+//               bookshelf: book.bookshelf
+//             }
+//     });
+//   });
+
+//   // Iterate over data to instantiate books
+
+//   // Return an array of Book instances
+// }
 
 // Get data and post to show page
 function postResults(req, res) {

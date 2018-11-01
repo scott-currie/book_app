@@ -23,6 +23,7 @@ nav ul {
 
 main {
   height: 80%;
+  overflow: scroll;
 }
 
 main section:first-of-type h1 {

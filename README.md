@@ -68,4 +68,15 @@ Start time: 9:36am
 Finish time: 11:12am
 
 Actual time needed to complete: 96min
+
+10-31-2018 11:22am - Feature 6 started
+Number and name of feature: Show all saved books when the application loads
+
+Estimate of time needed to complete: 90min
+
+Start time: 11:22am
+
+Finish time: 
+
+Actual time needed to complete: 
 ## Credits and Collaborations
