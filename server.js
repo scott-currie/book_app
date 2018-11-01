@@ -27,18 +27,20 @@ app.get('/books/:id', getTheBook);
 
 // Book object constructor
 function Book(bookData) {
+  // title and description are properties of both API and db results
   this.title = (bookData.title) ? bookData.title : "Title not found";
   this.description = (bookData.description) ? bookData.description: "Description not found.";
-  // If bookData has no id, it's an API result
-  if (!bookData.id) {
+  if (!bookData.id) {   // If bookData has no id, it's an API result
     this.author = (bookData.authors[0]) ? bookData.authors[0]: "Author not found";
     this.isbn = (bookData.industryIdentifiers[0].identifier) ? bookData.industryIdentifiers[0].identifier: "ISBN not found";
     this.image_url = (bookData.imageLinks.thumbnail) ? bookData.imageLinks.thumbnail: "Image not found";
   }
-  else {
+  else {  // else do the db result specific stuff
+    this.id = bookData.id;
     this.author = (bookData.author) ? bookData.author: "Author not found";
     this.isbn = (bookData.isbn) ? bookData.isbn: "ISBN not found";
     this.image_url = (bookData.image_url) ? bookData.image_url: "Image not found";
+    this.bookshelf = bookData.bookshelf;
   }
 }
 
@@ -49,15 +51,7 @@ function getBooks(req, res) {
   dbClient.query(SQL)
   .then(result => {
     const books = (result.rows).map((book) => {
-      return {
-              id: book.id,
-              author: book.author,
-              title: book.title,
-              isbn: book.isbn,
-              image_url: book.image_url,
-              description: book.description,
-              bookshelf: book.bookshelf
-            }
+      return new Book(book);
     });
     res.render('./pages/index', {books: books});
   });
@@ -78,8 +72,6 @@ function postResults(req, res) {
     res.render('pages/searches/show', {data: books});
   })
   .catch((err) => res.render('pages/error.ejs', {err:err}));
-  // res.render(_URL);
-
 }
 
 function getTheBook(req, res) {
@@ -88,7 +80,7 @@ function getTheBook(req, res) {
   const values = [req.params.id];
   dbClient.query(SQL, values)
   .then(result => {
-    res.render('pages/books/show', {book: result.rows[0]});
+    res.render('pages/books/show', {book: new Book(result.rows[0])});
   })
   .catch((err) => res.render('pages/error.ejs', {err:err}));
 }
