@@ -13,7 +13,7 @@
       <% if (book.id) {%>
         <li><p>Bookshelf: <%= book.bookshelf %></p></li> 
       <% } else { %>
-        <li><a href="#" type="button" class="selectButton">Select this book</a></li>
+        <li><a href="#" type="button" class="selectButton" id="<%= 'button' + index %>" >Select this book</a></li>
       <% } %>
     <% } %>
   </ul>
