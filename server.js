@@ -24,7 +24,7 @@ app.get('/', getDBBooks);
 app.get('/searches', getAPIResults);
 app.post('/searches', postAPIResults);
 app.get('/books/:id', getDBBook);
-
+app.post('/books', postToDB);
 
 // Book object constructor
 function Book(bookData) {
@@ -60,13 +60,20 @@ function getDBBooks(req, res) {
 }
 
 function getDBBook(req, res) {
-  console.log('doing getTheBook');
   const SQL = `SELECT * FROM books WHERE id = $1;`;
   const values = [req.params.id];
   dbClient.query(SQL, values)
   .then(result => {
-    res.render('pages/books/show', {book: new Book(result.rows[0])});
+    (req.method.toLowerCase() == 'get') ? res.render('pages/books/show', {book: new Book(result.rows[0])}) : res.redirect('/');
   })
+  .catch((err) => res.render('pages/error.ejs', {err:err}));
+}
+
+function postToDB(req, res) {
+  const SQL = `INSERT INTO books (author, title, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);`;
+  const values = Object.values(req.body);
+  dbClient.query(SQL, values)
+  .then(getDBBook(req, res))
   .catch((err) => res.render('pages/error.ejs', {err:err}));
 }
 
@@ -78,14 +85,12 @@ function getAPIResults(req, res) {
 
 // Get data and post to show page
 function postAPIResults(req, res) {
-  // const query = req.body['book-search'][0];
   const searchTerm = req.body['book-search'][0];
   const query = (req.body['book-search'][1] === 'title') ? `+intitle:${searchTerm}` : `+inauthor:${searchTerm}`;
   let _url = `https://www.googleapis.com/books/v1/volumes?q=${query}`;
 
   return superagent.get(_url)
   .then((data) => {
-    // console.log(data.body.items[0]);
     const books = data.body.items.map(apiBook => new Book(apiBook.volumeInfo));
     res.render('pages/searches/show', {books: books});
   })
