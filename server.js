@@ -20,9 +20,10 @@ app.use(express.static('public'));
 
 
 // CRUD actions
-app.get('/', getBooks);
-app.post('/searches', postResults);
-app.get('/books/:id', getTheBook);
+app.get('/', getDBBooks);
+app.get('/searches', getAPIResults);
+app.post('/searches', postAPIResults);
+app.get('/books/:id', getDBBook);
 
 
 // Book object constructor
@@ -45,7 +46,8 @@ function Book(bookData) {
 }
 
 
-function getBooks(req, res) {
+// DB Functionality
+function getDBBooks(req, res) {
   const SQL = 'SELECT * FROM books';
 
   dbClient.query(SQL)
@@ -57,9 +59,25 @@ function getBooks(req, res) {
   });
 }
 
+function getDBBook(req, res) {
+  console.log('doing getTheBook');
+  const SQL = `SELECT * FROM books WHERE id = $1;`;
+  const values = [req.params.id];
+  dbClient.query(SQL, values)
+  .then(result => {
+    res.render('pages/books/show', {book: new Book(result.rows[0])});
+  })
+  .catch((err) => res.render('pages/error.ejs', {err:err}));
+}
+
+
+//API
+function getAPIResults(req, res) {
+  res.render('pages/searches/new');
+}
 
 // Get data and post to show page
-function postResults(req, res) {
+function postAPIResults(req, res) {
   // const query = req.body['book-search'][0];
   const searchTerm = req.body['book-search'][0];
   const query = (req.body['book-search'][1] === 'title') ? `+intitle:${searchTerm}` : `+inauthor:${searchTerm}`;
@@ -74,15 +92,5 @@ function postResults(req, res) {
   .catch((err) => res.render('pages/error.ejs', {err:err}));
 }
 
-function getTheBook(req, res) {
-  console.log('doing getTheBook');
-  const SQL = `SELECT * FROM books WHERE id = $1;`;
-  const values = [req.params.id];
-  dbClient.query(SQL, values)
-  .then(result => {
-    res.render('pages/books/show', {book: new Book(result.rows[0])});
-  })
-  .catch((err) => res.render('pages/error.ejs', {err:err}));
-}
 
 app.listen(PORT,()  => console.log(`Listening on ${PORT}`));
