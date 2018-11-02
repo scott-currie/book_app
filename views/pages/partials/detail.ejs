@@ -10,7 +10,11 @@
 
       <li><p><%= book.description %></p></li>
       <li><p>ISBN: <%= book.isbn %></p></li>
-      <li><p>Bookshelf: <%= book.bookshelf %></p></li>
+      <% if (book.id) {%>
+        <li><p>Bookshelf: <%= book.bookshelf %></p></li> 
+      <% } else { %>
+        <li><a href="" type="button">Select this book</a></li>
+      <% } %>
     <% } %>
   </ul>
 </section>

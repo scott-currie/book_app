@@ -87,7 +87,7 @@ function postAPIResults(req, res) {
   .then((data) => {
     // console.log(data.body.items[0]);
     const books = data.body.items.map(apiBook => new Book(apiBook.volumeInfo));
-    res.render('pages/searches/show', {data: books});
+    res.render('pages/searches/show', {books: books});
   })
   .catch((err) => res.render('pages/error.ejs', {err:err}));
 }

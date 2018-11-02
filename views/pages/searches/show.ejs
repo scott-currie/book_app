@@ -1,12 +1,25 @@
-<h1>Show Results Page</h1>
+<!DOCTYPE html>
+<html>
+  <%- include('../partials/head.ejs') %>
 
-  <% data.forEach( book => { %>
-      <ul>
-        <li><%= book.title %></li>
-        <li><%= book.author %></li>
-        <li><%= book.isbn %></li>
-        <li><%= book.image_url %></li>
-        <li><%= book.description %></li>
-      </ul>
-    <% }); %>
+  <body>
+    <%- include('../partials/header.ejs') %>
+
+    <main>
+      <section>
+        <h1>Search Results</h1>
+      </section>
+      <section>
+          <% books.forEach( book => { %>
+            <%- include('../partials/detail.ejs', {book: book, route: '#'}) %>
+          <% }); %>
+
+      </section>
+    </main>
+
+    <%- include('../partials/footer.ejs') %>
+
+  </body>
+</html>
+
 
