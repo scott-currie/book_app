@@ -20,9 +20,10 @@ app.use(express.static('public'));
 
 
 // CRUD actions
-app.get('/', getBooks);
-app.post('/searches', postResults);
-app.get('/books/:id', getTheBook);
+app.get('/', getDBBooks);
+app.get('/searches', getAPIResults);
+app.post('/searches', postAPIResults);
+app.get('/books/:id', getDBBook);
 
 
 // Book object constructor
@@ -45,7 +46,8 @@ function Book(bookData) {
 }
 
 
-function getBooks(req, res) {
+// DB Functionality
+function getDBBooks(req, res) {
   const SQL = 'SELECT * FROM books';
 
   dbClient.query(SQL)
@@ -57,24 +59,7 @@ function getBooks(req, res) {
   });
 }
 
-
-// Get data and post to show page
-function postResults(req, res) {
-  // const query = req.body['book-search'][0];
-  const searchTerm = req.body['book-search'][0];
-  const query = (req.body['book-search'][1] === 'title') ? `+intitle:${searchTerm}` : `+inauthor:${searchTerm}`;
-  let _url = `https://www.googleapis.com/books/v1/volumes?q=${query}`;
-
-  return superagent.get(_url)
-  .then((data) => {
-    // console.log(data.body.items[0]);
-    const books = data.body.items.map(apiBook => new Book(apiBook.volumeInfo));
-    res.render('pages/searches/show', {data: books});
-  })
-  .catch((err) => res.render('pages/error.ejs', {err:err}));
-}
-
-function getTheBook(req, res) {
+function getDBBook(req, res) {
   console.log('doing getTheBook');
   const SQL = `SELECT * FROM books WHERE id = $1;`;
   const values = [req.params.id];
@@ -84,5 +69,28 @@ function getTheBook(req, res) {
   })
   .catch((err) => res.render('pages/error.ejs', {err:err}));
 }
+
+
+//API
+function getAPIResults(req, res) {
+  res.render('pages/searches/new');
+}
+
+// Get data and post to show page
+function postAPIResults(req, res) {
+  // const query = req.body['book-search'][0];
+  const searchTerm = req.body['book-search'][0];
+  const query = (req.body['book-search'][1] === 'title') ? `+intitle:${searchTerm}` : `+inauthor:${searchTerm}`;
+  let _url = `https://www.googleapis.com/books/v1/volumes?q=${query}`;
+
+  return superagent.get(_url)
+  .then((data) => {
+    // console.log(data.body.items[0]);
+    const books = data.body.items.map(apiBook => new Book(apiBook.volumeInfo));
+    res.render('pages/searches/show', {books: books});
+  })
+  .catch((err) => res.render('pages/error.ejs', {err:err}));
+}
+
 
 app.listen(PORT,()  => console.log(`Listening on ${PORT}`));

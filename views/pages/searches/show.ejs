@@ -1,12 +1,31 @@
-<h1>Show Results Page</h1>
+<!DOCTYPE html>
+<html>
+  <%- include('../partials/head.ejs') %>
 
-  <% data.forEach( book => { %>
-      <ul>
-        <li><%= book.title %></li>
-        <li><%= book.author %></li>
-        <li><%= book.isbn %></li>
-        <li><%= book.image_url %></li>
-        <li><%= book.description %></li>
-      </ul>
-    <% }); %>
+  <body>
+    <%- include('../partials/header.ejs') %>
+
+    <main>
+      <section>
+        <h1>Search Results</h1>
+      </section>
+      <section>
+          <% books.forEach((book, index) => { %>
+            <%- include('../partials/addForm.ejs', {book: book, route: '/books', index:index}) %>
+            <%- include('../partials/detail.ejs', {book: book, route: '#', index:index}) %>
+          <% }); %>
+      </section>
+    </main>
+
+    <%- include('../partials/footer.ejs') %>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+      crossorigin="anonymous">
+    </script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
+
 
